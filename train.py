@@ -14,17 +14,17 @@ def train(data_type, seq_length, model, saved_model=None,
           class_limit=None, image_shape=None,
           load_to_memory=False, batch_size=32, nb_epoch=100):
     # Helper: Save the model.
-    checkpointer = ModelCheckpoint(filepath=os.path.join('Geriatrics_Data','Video','checkpoints', model + '-' + data_type + '.{epoch:03d}-{val_loss:.3f}.hdf5'),verbose=1,save_best_only=True)
+    checkpointer = ModelCheckpoint(filepath=os.path.join('/content','Geriatrics_Data','Video','checkpoints', model + '-' + data_type + '.{epoch:03d}-{val_loss:.3f}.hdf5'),verbose=1,save_best_only=True)
 
     # Helper: TensorBoard
-    tb = TensorBoard(log_dir=os.path.join('Geriatrics_Data','Video','logs', model))
+    tb = TensorBoard(log_dir=os.path.join('/content','Geriatrics_Data','Video','logs', model))
 
     # Helper: Stop when we stop learning.
     early_stopper = EarlyStopping(patience=5)
 
     # Helper: Save results.
     timestamp = time.time()
-    csv_logger = CSVLogger(os.path.join('Geriatrics_Data','Video','logs', model + '-' + 'training-' + \
+    csv_logger = CSVLogger(os.path.join('/content','Geriatrics_Data','Video','logs', model + '-' + 'training-' + \
         str(timestamp) + '.log'))
 
     # Get the data and process it.
@@ -93,11 +93,11 @@ def main():
         print ("Example: python train.py 75 2 720 1280")
         exit (1)
 
-    sequences_dir = os.path.join('Geriatrics_Data','Video','sequences')
+    sequences_dir = os.path.join('/content','Geriatrics_Data','Video','sequences')
     if not os.path.exists(sequences_dir):
         os.mkdir(sequences_dir)
 
-    checkpoints_dir = os.path.join('Geriatrics_Data','Video','checkpoints')
+    checkpoints_dir = os.path.join('/content','Geriatrics_Data','Video','checkpoints')
     if not os.path.exists(checkpoints_dir):
         os.mkdir(checkpoints_dir)
 
